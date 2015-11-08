@@ -1,13 +1,13 @@
 # Drone on VUE
-## Podgląd aplikacji w czasie rzeczywistym 
-
-[![\\](https://img.shields.io/badge/dron-w%20trakcie%20budowy-green.svg?style=flat-square)]()
+Podgląd aplikacji w czasie rzeczywistym
 
 ## Dokumentacja
 Tutaj może coś o dokumentacji tego gówna
 
 ## W jaki sposób pobrać kod źródłowy
-
+#bower
+<img src="http://benschwarz.github.io/bower-badges/badge@2x.png" width="130" height="30">
+#
 ### Klonowanie repozytorium
 
 ```
