@@ -1,0 +1,19 @@
+{
+  "name": "droneOnVue",
+  "homepage": "https://github.com/kacgrzes/droneOnVue",
+  "authors": [
+    "Kacper Grzeszczyk <kacgrzes@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
