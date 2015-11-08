@@ -103,12 +103,3 @@ body {
     display: inline-block;
     border-radius: 50%;
 }
-
-/*
- * map things
- */
-
-#map {
-    width: 100%;
-    height: 400px;
-}
