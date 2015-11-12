@@ -15,8 +15,8 @@
     <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="styles/dashboard.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles/animations.css"/>
+    <link href="/styles/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/animations.css"/>
 
 </head>
 
@@ -106,13 +106,20 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="lib/jquery/dist/jquery.min.js"></script>
-<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/lib/jquery/dist/jquery.min.js"></script>
+<script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js"></script>
-<script src="scripts/map.js"></script>
-
-<script src="lib/vue/dist/vue.min.js"></script>
-<script src="scripts/app.js"></script>
+<script src="/scripts/map.js"></script>
+<script src="/lib/vue/dist/vue.min.js"></script>
+<script src="/scripts/app.js"></script>
+<script type="application/javascript">
+    $(document).ready(function() {
+        var ws = new WebSocket("%(ws_address)s");
+        ws.onmessage = function(event) {
+            console.log(event.data);
+        }
+    })
+</script>
 
 </body>
 </html>
