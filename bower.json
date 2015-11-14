@@ -1,6 +1,6 @@
 {
-  "name": "droneOnVue",
-  "homepage": "https://github.com/kacgrzes/droneOnVue",
+  "name": "drone3city",
+  "homepage": "https://github.com/kacgrzes/drone3city",
   "authors": [
     "Kacper Grzeszczyk <kacgrzes@gmail.com>"
   ],
@@ -17,7 +17,7 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "~3.3.5",
-    "vue": "~1.0.7"
+    "react": "~0.14.2",
+    "material-design-lite": "~1.0.6"
   }
 }

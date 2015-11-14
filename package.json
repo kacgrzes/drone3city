@@ -1,5 +1,5 @@
 {
-  "name": "drone-on-vue",
+  "name": "drone3city",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kacgrzes/droneOnVue.git"
+    "url": "git+https://github.com/kacgrzes/drone3city.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kacgrzes/droneOnVue/issues"
+    "url": "https://github.com/kacgrzes/drone3city/issues"
   },
-  "homepage": "https://github.com/kacgrzes/droneOnVue#readme",
+  "homepage": "https://github.com/kacgrzes/drone3city#readme",
   "dependencies": {
     "gulp": "^3.9.0",
     "gulp-bower": "0.0.10",
