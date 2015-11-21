@@ -1,4 +1,5 @@
 import React from 'react';
+import CSS from './Component.css'
  
 class Hello extends React.Component {
   render() {
