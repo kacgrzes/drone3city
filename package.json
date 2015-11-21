@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./node_modules/.bin/http-server",
+    "build": "webpack",
+    "dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build"
   },
   "repository": {
     "type": "git",
@@ -17,8 +19,18 @@
   },
   "homepage": "https://github.com/kacgrzes/drone3city#readme",
   "dependencies": {
-    "gulp": "^3.9.0",
-    "gulp-bower": "0.0.10",
-    "gulp-connect": "^2.2.0"
+    "material-design-lite": "^1.0.6",
+    "react": "^0.14.2",
+    "webpack-dev-server": "^1.12.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.1.21",
+    "babel-loader": "^6.1.0",
+    "css-loader": "^0.23.0",
+    "http-server": "^0.8.5",
+    "jsx-loader": "^0.13.2",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.8",
+    "webpack-dev-server": "^1.12.1"
   }
 }
