@@ -22,6 +22,10 @@ var config = {
             {
                 test: /\.jsx?$/,
                 loader: 'jsx'
+            },
+            {
+                test: /\.css$/, 
+                loader: 'style!css'
             }
         ],
         noParse: [pathToReact]
