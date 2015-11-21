@@ -20,12 +20,10 @@
   "homepage": "https://github.com/kacgrzes/drone3city#readme",
   "dependencies": {
     "material-design-lite": "^1.0.6",
-    "react": "^0.14.2",
+    "react": "^0.14.3",
     "webpack-dev-server": "^1.12.1"
   },
   "devDependencies": {
-    "babel-core": "^6.1.21",
-    "babel-loader": "^6.1.0",
     "css-loader": "^0.23.0",
     "http-server": "^0.8.5",
     "jsx-loader": "^0.13.2",

@@ -1,5 +1,8 @@
-'use strict';
+var React = require('react');
+var Hello = require('./component.jsx');
 
-var component = require('./component.js');
+main();
 
-document.body.appendChild(component());
+function main() {
+    React.render(<Hello/>, document.getElementById('app'));
+}
