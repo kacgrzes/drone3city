@@ -1,4 +1,5 @@
 .on-map-actions{
+	width: 56px;
 	padding: 10px;
 	position: absolute;
 	z-index: 9000;

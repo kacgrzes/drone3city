@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Grid, Cell } from 'react-mdl';
 import Navigation from './Components/Navigation.jsx';
 import Logs from './Components/Logs.jsx';
-import Map from './Components/Map.jsx';
+import Map from './Components/Map/Map.jsx';
 
 import ReactToastr from 'react-toastr';
 
@@ -20,6 +20,7 @@ class App extends React.Component {
     constructor() {
       super();
       this.addAlert = this.addAlert.bind(this);
+      this.takeOff = this.takeOff.bind(this);
     }
 
     //RENDER
@@ -31,7 +32,8 @@ class App extends React.Component {
                         className="toast-top-right" />
                 <Grid>
                     <Cell col={4}>
-                    	<Navigation></Navigation>
+                    	<Navigation 
+                            onTakeOff={this.takeOff}></Navigation>
                     	<Logs></Logs>
                     </Cell>
                     <Cell col={8}>
@@ -39,19 +41,23 @@ class App extends React.Component {
                     </Cell>
                 </Grid>
 
-                <button onClick={this.addAlert}>GGininder</button>
+                <button onClick={this.takeOff}>GGininder</button>
             </div>
         );
     }
 
     //CUSTOM METHODS 
-    addAlert () {
+    addAlert (message) {
         this.refs.container.success(
-          "Welcome welcome welcome!!",
-          "You are now home my friend. Welcome home my friend.", {
+          message.text,
+          message.title, {
           timeOut: 3000,
           extendedTimeOut: 3000
         });
+    }
+
+    takeOff (message) {
+        this.addAlert(message);
     }
 
 }

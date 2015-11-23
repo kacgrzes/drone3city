@@ -1,8 +1,9 @@
 import React from 'react';
 import { Card, CardTitle, CardText, CardActions, Button, FABButton, Icon } from 'react-mdl';
 import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
+import Battery from '../Battery/Battery.jsx';
 
-require('./Map.css');
+require('../Map/Map.css');
 
 const coords = {
   lat: 54.5258541,
@@ -60,11 +61,12 @@ class Map extends React.Component {
     		          onDragEnd={this.onDragEnd}
     		          onClick={this.onClick} />
                   
-                  <div className="on-map-actions">
-                    <FABButton colored ripple>
-                      <Icon name="flight_takeoff" />
-                    </FABButton>
-                  </div>
+                <div className="on-map-actions">
+                  <FABButton colored ripple>
+                    <Icon name="flight_takeoff" />
+                  </FABButton>
+                  <Battery></Battery>
+                </div>
 
     		      </Gmaps>
             </Card>
