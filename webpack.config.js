@@ -12,9 +12,7 @@ var config = {
         this.module.noParse.push(new RegExp('^' + name + '$'));
     },
     entry: {
-        app: [
-            'webpack/hot/dev-server',
-            'webpack-dev-server/client?http://localhost:8080',    
+        app: [ 
             path.resolve(__dirname, 'app/App.jsx')
         ]
         // vendors: ['react']
