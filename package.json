@@ -19,12 +19,14 @@
   },
   "homepage": "https://github.com/kacgrzes/drone3city#readme",
   "dependencies": {
+    "fbjs": "^0.3.2",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-gmaps": "^1.2.0",
     "react-mdl": "^1.0.1",
     "react-pure-render": "^1.0.2",
-    "react-tap-event-plugin": "^0.2.1"
+    "react-tap-event-plugin": "^0.2.1",
+    "react-toastr": "^2.2.2"
   },
   "devDependencies": {
     "babel-core": "^6.2.1",

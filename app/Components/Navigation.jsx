@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardTitle, CardText, CardActions, Button } from 'react-mdl';
-var image = require("file!./drone.jpg");
+var image = require("file!../drone.jpg");
 
 class Navigation extends React.Component {
   render() {
