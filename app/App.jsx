@@ -46,7 +46,6 @@ class App extends React.Component {
 
     //CUSTOM METHODS 
     addAlert () {
-        console.log(this);
         this.refs.container.success(
           "Welcome welcome welcome!!",
           "You are now home my friend. Welcome home my friend.", {
