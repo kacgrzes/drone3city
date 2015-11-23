@@ -2,9 +2,10 @@ import React from 'react';
 import { Grid, Cell } from 'react-mdl';
 import Navigation from './Navigation.jsx';
 import Logs from './Logs.jsx';
-// import Map from './Map.jsx';
+import Map from './Map.jsx';
 
 class App extends React.Component {
+
     render() {
         return (
             <div style={{width: '100%', margin: 'auto'}}>
@@ -15,7 +16,7 @@ class App extends React.Component {
                     	<Logs></Logs>
                     </Cell>
                     <Cell col={8}>
-                        Tutaj będzie mapa
+                        <Map></Map>
                     </Cell>
                 </Grid>
             </div>
