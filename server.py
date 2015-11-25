@@ -1,7 +1,7 @@
 # biblioteki systemowe, framework cherrypy
 import os
 import cherrypy
-import sys
+import threading
 
 # biblioteka websocket
 from ws4py.server.cherrypyserver import WebSocketPlugin, WebSocketTool
@@ -15,13 +15,38 @@ import simplejson
 from dronekit import connect
 from dronekit.lib import VehicleMode, LocationGlobal
 
-# zdefiniowanie lokalnej sciezki dla serwera
-local_path = os.path.join(os.getcwd(), 'build/')
+# zdefiniowanie lokalnej sciezki dla plikow statycznych
+local_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'build')
 
 # zdefiniowanie sciezki, oraz otworzenie pliku html dla pliku index.html
 index_path = os.path.join(local_path, 'index.html')
+print local_path
+
 index_site = file(index_path, 'r').read()
 print index_site
+
+
+# # Connecting to the Quadcopter
+print 'Connecting to quadcopter in progress...'
+quadcopter = connect('127.0.0.1:14550', wait_ready=True)
+
+# Wyzwalanie WebSocketa
+def ws_trigger():
+        threading.Timer(1, ws_trigger).start()
+        data = simplejson.dumps({
+            'altitude': quadcopter.location.global_relative_frame.alt,
+            'longtitude': quadcopter.location.global_relative_frame.lon,
+            'lattitude': quadcopter.location.global_relative_frame.lat,
+            'armed': quadcopter.armed,
+            'mode': quadcopter.mode.name,
+            'batterylevel': quadcopter.battery.level,
+            'pitch': quadcopter.attitude.pitch,
+            'yaw': quadcopter.attitude.yaw,
+            'roll': quadcopter.attitude.roll,
+        }, separators=(',',':'))
+        cherrypy.engine.publish('websocket-broadcast', data)
+
+
 
 class QuadcopterWebSocketHandler(WebSocket):
     def received_message(self, message):
@@ -30,21 +55,10 @@ class QuadcopterWebSocketHandler(WebSocket):
     def closed(self, code, reason="Polaczenie z WebSocketem zostalo przerwane"):
         cherrypy.engine.publish('websocket-broadcast', TextMessage(reason))
 
-class Quadcopter(object):
-    def __init__(self, home_position):
-        # podlaczenie sie do quadcoptera
-        self.quadcopter = connect('127.0.0.1:14550', await_params=True)
-        # ustawianie pol klasy quadcopter
-        self.altitude = self.quadcopter.location.alt
-        self.latitude = self.quadcopter.location.lat
-        self.longtitude = self.quadcopter.location.lon
-        self.battery_level = self.quadcopter.battery.level
-        self.isArmed = self.quadcopter.armed
-        self.mode = self.quadcopter.mode.name
-        self.takeoff = self.quadcopter.commands.takeoff
-        self.goto = self.quadcopter.commands.goto
 
-        self.quadcopter.add_attribute_observer('armed', self.callback)
+class Quadcopter(object):
+    def __init__(self, home_position): #dodac potem home position
+        print 'Connected to the quadcopter'
 
     @cherrypy.expose
     def index(self):
@@ -56,35 +70,20 @@ class Quadcopter(object):
 
     @cherrypy.expose
     def arming(self):
-        cherrypy.engine.publish('websocket-broadcast', str(self.quadcopter.location.alt))
-        self.quadcopter.armed = True
+        quadcopter.armed = True
+
+    ws_trigger()
 
     @cherrypy.expose
     def takingoff(self):
-        self.quadcopter.mode = VehicleMode('GUIDED')
-        if self.quadcopter.armed and self.altitude is not None:
-            self.quadcopter.commands.takeoff(10)
+        quadcopter.mode = VehicleMode('GUIDED')
+        if quadcopter.armed and quadcopter.location.global_frame.alt is not None:
+            quadcopter.simple_takeoff(10)
         else:
-            if self.quadcopter.armed:
+            if quadcopter.armed:
                 raise cherrypy.HTTPError(500, "Parametr uwzgledniajacy wysokosc nie zostal podany")
             else:
                 raise cherrypy.HTTPError(500, "Quadcopter nie jest uzbrojony")
-
-    # Callback for observer
-    def callback(self, armed):
-        data = simplejson.dumps({
-            'altitude': self.quadcopter.location.alt,
-            'longtitude': self.quadcopter.location.lon,
-            'lattitude': self.quadcopter.location.lat,
-            'armed': self.quadcopter.armed,
-            'mode': self.quadcopter.mode.name,
-            'batterylevel': self.quadcopter.battery.level,
-            'pitch': self.quadcopter.attitude.pitch,
-            'yaw': self.quadcopter.attitude.yaw,
-            'roll': self.quadcopter.attitude.roll,
-        }, separators=(',',':'))
-
-        cherrypy.engine.publish('websocket-broadcast', data)
 
 if __name__=='__main__':
     cherrypy.config.update({
@@ -109,10 +108,10 @@ if __name__=='__main__':
         },
         '/extra': {
             'tools.staticdir.on': True,
-            'tools.staticdir.dir': "extra"
+            'tools.staticdir.dir': "./extra"
         },
         '/app': {
             'tools.staticdir.on': True,
-            'tools.staticdir.dir': "app"
+            'tools.staticdir.dir': "./app"
         }
     })
