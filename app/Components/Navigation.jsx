@@ -44,11 +44,7 @@ class Navigation extends React.Component {
     }
 
     handleTakeOff () {
-        this.props.onTakeOff({
-            type: 'success',
-            text: 'Trwa odrywanie od ziemi!',
-            title: 'Sukces'
-        });
+        this.props.onTakeOff();
     }
 }
 

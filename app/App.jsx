@@ -23,6 +23,7 @@ class App extends React.Component {
       this.addAlert = this.addAlert.bind(this);
       this.takeOff = this.takeOff.bind(this);
       this.arming = this.arming.bind(this);
+      this.state = { flightParams: {} }
     }
 
     componentDidMount() {
@@ -36,7 +37,8 @@ class App extends React.Component {
             });
         };
         ws.onmessage = function(event) {
-            // console.log(event.data);
+            self.setState({flightParams:event.data});
+            console.log(self.state.flightParams);
         }
         ws.onerror = function(event) {
             self.addAlert({
@@ -64,7 +66,7 @@ class App extends React.Component {
                     	<Logs></Logs>
                     </Cell>
                     <Cell col={8}>
-                        <Map></Map>
+                        <Map flightParams={this.state.flightParams}></Map>
                     </Cell>
                 </Grid>
             </div>
@@ -106,30 +108,23 @@ class App extends React.Component {
         req.send(null);
     }
 
-    takeOff (message) {
+    takeOff () {
         var self = this;
 
-        var url = 'http://localhost:9000/takingoff';
-        function onProgress(e) {
-            var percentComplete = (e.position / e.totalSize)*100;
-            console.info(percentComplete);
-        }
-
-        function onError(e) {
-            console.warn(e);
-        }
-
-        function onLoad(e) {
-            console.info(e);
-            self.addAlert(message);
-        }
-
-        var req = new XMLHttpRequest();
-        req.onprogress = onProgress;
-        req.open("GET", url, true);
-        req.onload = onLoad;
-        req.onerror = onError;
-        req.send(null);
+        var jqxhr = $.get( "http://localhost:9000/takingoff", function() {
+            self.addAlert({
+                type: 'success',
+                title: 'Sukces',
+                text: 'Trwa odrywanie drona' 
+            });
+        })
+        .fail(function() {
+            self.addAlert({
+                type: 'error',
+                title: 'Błąd',
+                text: 'Nie udało się wznieść drona' 
+            });
+        });
     }
 
 
