@@ -38,7 +38,7 @@ class App extends React.Component {
         };
         ws.onmessage = function(event) {
             self.setState({flightParams:event.data});
-            console.log(self.state.flightParams);
+            // console.log(self.state.flightParams);
         }
         ws.onerror = function(event) {
             self.addAlert({
