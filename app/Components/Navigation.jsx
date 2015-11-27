@@ -23,13 +23,14 @@ class Navigation extends React.Component {
                         Aenan convallis.
                     </CardText>
                     <CardActions border>
-                        <Button onClick={this.handleTakeOff} raised accent ripple>View Updates</Button>
+                        <Button onClick={this.handleTakeOff} raised accent ripple>Uzbrajanie</Button>
                     </CardActions>
                 </Card>
     }
 
     handleTakeOff () {
         this.props.onTakeOff({
+            type: 'success'
             text: 'Hello world!',
             title: 'Title'
         });

@@ -25,11 +25,25 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+        var self = this;
         var ws = new WebSocket("ws://localhost:9000/ws");
-          console.log("started WebSocket");
-          ws.onmessage = function(event) {
-              console.log(event.data);
-          }
+        ws.onopen = function (event) {
+            self.addAlert({
+                type: 'success',
+                title: 'Sukces',
+                text: 'Podłączono z WebSocket'
+            });
+        };
+        ws.onmessage = function(event) {
+            console.log(event.data);
+        }
+        ws.onerror = function(event) {
+            self.addAlert({
+                type: 'error',
+                title: 'Błąd',
+                text: 'Nie udało się nawiązać połączenia' 
+            })
+        }
     }
 
 
@@ -58,7 +72,7 @@ class App extends React.Component {
 
     //CUSTOM METHODS 
     addAlert (message) {
-        this.refs.container.success(
+        this.refs.container[message.type](
           message.text,
           message.title, {
           timeOut: 3000,
@@ -67,8 +81,30 @@ class App extends React.Component {
     }
 
     takeOff (message) {
-        this.addAlert(message);
+        var self = this;
+
+        var url = 'http://localhost:9000/arming';
+        function onProgress(e) {
+            var percentComplete = (e.position / e.totalSize)*100;
+            console.info(percentComplete);
+        }
+
+        function onError(e) {
+            console.warn('Error');
+        }
+
+        function onLoad(e) {
+            self.addAlert(message);
+        }
+
+        var req = new XMLHttpRequest();
+        req.onprogress = onProgress;
+        req.open("GET", url, true);
+        req.onload = onLoad;
+        req.onerror = onError;
+        req.send(null);
     }
+
 
 }
 
