@@ -30,7 +30,7 @@ class Navigation extends React.Component {
                             onClick={this.handleArming}>
                                 <Icon name="vpn_key"/>
                         </FABButton>
-                        <Button onClick={this.handleTakeOff} raised accent ripple>Uzbrajanie</Button>
+                        <Button onClick={this.handleTakeOff} raised accent ripple>Oderwij od ziemi</Button>
                     </CardActions>
                 </Card>
     }
