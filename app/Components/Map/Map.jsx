@@ -14,7 +14,7 @@ class Map extends React.Component {
     
     constructor() {
       super();
-      this.goto = this.goto.bind(this);
+      this.gotoDrone = this.gotoDrone.bind(this);
     }
 
     onMapCreated(map) {
@@ -33,10 +33,18 @@ class Map extends React.Component {
 
   	onClick(e) {
       var lat = e.latLng.lat,
-        len = e.latLng.len;
-      goto({
-        lat: lat(),
-        len: len()
+        lng = e.latLng.lng;
+
+      var jqxhr = $.post( "http://localhost:9000/goto", 
+        { 
+          longtitude: lng(),
+          lattitude: lat() 
+        })
+      .done(function(data){
+        console.info('going to ...');
+      })
+      .fail(function() {
+        console.warn('nope ...');
       });
   	}
 
@@ -82,22 +90,6 @@ class Map extends React.Component {
     		      </Gmaps>
             </Card>
   	}
-
-    goto(pos) {
-      var self = this;
-
-      var jqxhr = $.post( "http://localhost:9000/goto", 
-        { 
-          longtitude: pos.len,
-          lattitude: pos.lat 
-        })
-      .done(function(data){
-        console.info('going to ...');
-      })
-      .fail(function() {
-        console.warn('nope ...');
-      });
-    }
 
 }
 
