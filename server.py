@@ -60,9 +60,11 @@ class Quadcopter(object):
     def __init__(self, home_position): #dodac potem home position
         print 'Connected to the quadcopter'
 
+    ws_trigger()
+
     @cherrypy.expose
     def index(self):
-        return index_site % {'ws_address': 'ws://localhost:9000/ws'}
+        return index_site
 
     @cherrypy.expose
     def ws(self):
@@ -70,20 +72,21 @@ class Quadcopter(object):
 
     @cherrypy.expose
     def arming(self):
-        quadcopter.armed = True
-
-    ws_trigger()
+        if quadcopter.armed is False:
+            quadcopter.armed = True
+        else:
+            raise cherrypy.HTTPError(400, "Quadcopter nie moze zostac uzbrojony")
 
     @cherrypy.expose
     def takingoff(self):
         quadcopter.mode = VehicleMode('GUIDED')
-        if quadcopter.armed and quadcopter.location.global_frame.alt is not None:
+        if quadcopter.armed and quadcopter.location.global_relative_frame.alt < 0.1:
             quadcopter.simple_takeoff(10)
         else:
             if quadcopter.armed:
-                raise cherrypy.HTTPError(500, "Parametr uwzgledniajacy wysokosc nie zostal podany")
+                raise cherrypy.HTTPError(400, "Quadcopter znajduje sie w powietrzu")
             else:
-                raise cherrypy.HTTPError(500, "Quadcopter nie jest uzbrojony")
+                raise cherrypy.HTTPError(400, "Quadcopter nie jest uzbrojony")
 
 if __name__=='__main__':
     cherrypy.config.update({

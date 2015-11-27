@@ -115,14 +115,14 @@ class App extends React.Component {
             self.addAlert({
                 type: 'success',
                 title: 'Sukces',
-                text: 'Trwa odrywanie drona' 
+                text: 'Trwa odrywanie drona'
             });
         })
         .fail(function() {
             self.addAlert({
                 type: 'error',
                 title: 'Błąd',
-                text: 'Nie udało się wznieść drona' 
+                text: 'Nie udało się wznieść drona'
             });
         });
     }
