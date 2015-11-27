@@ -60,8 +60,8 @@ class Map extends React.Component {
             			onMapCreated={this.onMapCreated}>
 
             		<Marker
-    		          lat={coords.lat}
-    		          lng={coords.lng}
+    		          lat={this.props.flightParams.lattitude}
+    		          lng={this.props.flightParams.longtitude}
     		          draggable={true}
     		          onDragEnd={this.onDragEnd} />
 
