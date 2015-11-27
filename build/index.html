@@ -18,16 +18,15 @@
   <body>
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <div id="app"></div>
-  <script src="/app/bundle.js"></script>
-  <script type="application/javascript">
-    $(document).ready(function() {
-        var ws = new WebSocket("%(ws_address)s");
-        console.log("started WebSocket");
-        ws.onmessage = function(event) {
-            console.log(event.data);
-        }
-    })
-  </script>
+    <script type="application/javascript">
+      $(document).ready(function() {
+          var ws = new WebSocket("%(ws_address)s");
+          console.log("started WebSocket");
+          ws.onmessage = function(event) {
+              console.log(event.data);
+          }
+      })
+    </script>
   </body>
 
 </html>

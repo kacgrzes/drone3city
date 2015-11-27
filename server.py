@@ -100,7 +100,9 @@ if __name__=='__main__':
                 ('X-Frame-options', 'deny'),
                 ('X-XSS-Protection', '1; mode=block'),
                 ('X-Content-Type-Options', 'nosniff')
-            ]
+            ],
+            'tools.staticdir.on': True,
+            'tools.staticdir.dir': "./"
         },
         '/ws': {
             'tools.websocket.on': True,
@@ -109,9 +111,5 @@ if __name__=='__main__':
         '/extra': {
             'tools.staticdir.on': True,
             'tools.staticdir.dir': "./extra"
-        },
-        '/app': {
-            'tools.staticdir.on': True,
-            'tools.staticdir.dir': "./app"
         }
     })
