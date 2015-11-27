@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { Grid, Cell } from 'react-mdl';
+import ReactToastr from 'react-toastr';
+
 import Navigation from './Components/Navigation.jsx';
 import Logs from './Components/Logs.jsx';
 import Map from './Components/Map/Map.jsx';
 
-import ReactToastr from 'react-toastr';
 
 var ToastContainer = ReactToastr.ToastContainer;
 var ToastMessageFactory = React.createFactory(ReactToastr.ToastMessage.animation);
@@ -22,6 +23,15 @@ class App extends React.Component {
       this.addAlert = this.addAlert.bind(this);
       this.takeOff = this.takeOff.bind(this);
     }
+
+    componentDidMount() {
+        var ws = new WebSocket("ws://localhost:9000/ws");
+          console.log("started WebSocket");
+          ws.onmessage = function(event) {
+              console.log(event.data);
+          }
+    }
+
 
     //RENDER
     render() {
