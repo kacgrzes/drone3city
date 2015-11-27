@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardTitle, CardText, CardActions, Button } from 'react-mdl';
+import { Card, CardTitle, CardText, CardActions, FABButton, Icon, Button } from 'react-mdl';
 var image = require("file!../drone.jpg");
 
 class Navigation extends React.Component {
@@ -8,6 +8,7 @@ class Navigation extends React.Component {
     constructor() {
       super();
       this.handleTakeOff = this.handleTakeOff.bind(this);
+      this.handleArming = this.handleArming.bind(this);
     }
 
     //RENDER
@@ -23,16 +24,30 @@ class Navigation extends React.Component {
                         Aenan convallis.
                     </CardText>
                     <CardActions border>
+                        <FABButton 
+                            colored 
+                            ripple 
+                            onClick={this.handleArming}>
+                                <Icon name="vpn_key"/>
+                        </FABButton>
                         <Button onClick={this.handleTakeOff} raised accent ripple>Uzbrajanie</Button>
                     </CardActions>
                 </Card>
     }
 
+    handleArming () {
+        this.props.onArming({
+            type: 'success',
+            text: 'Uzbrojono drona!',
+            title: 'Sukces'
+        });
+    }
+
     handleTakeOff () {
         this.props.onTakeOff({
-            type: 'success'
-            text: 'Hello world!',
-            title: 'Title'
+            type: 'success',
+            text: 'Trwa odrywanie od ziemi!',
+            title: 'Sukces'
         });
     }
 }

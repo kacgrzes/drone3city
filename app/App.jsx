@@ -22,6 +22,7 @@ class App extends React.Component {
       super();
       this.addAlert = this.addAlert.bind(this);
       this.takeOff = this.takeOff.bind(this);
+      this.arming = this.arming.bind(this);
     }
 
     componentDidMount() {
@@ -35,7 +36,7 @@ class App extends React.Component {
             });
         };
         ws.onmessage = function(event) {
-            console.log(event.data);
+            // console.log(event.data);
         }
         ws.onerror = function(event) {
             self.addAlert({
@@ -57,15 +58,15 @@ class App extends React.Component {
                 <Grid>
                     <Cell col={4}>
                     	<Navigation 
-                            onTakeOff={this.takeOff}></Navigation>
+                            onTakeOff={this.takeOff}
+                            onArming={this.arming}
+                            ></Navigation>
                     	<Logs></Logs>
                     </Cell>
                     <Cell col={8}>
                         <Map></Map>
                     </Cell>
                 </Grid>
-
-                <button onClick={this.takeOff}>GGininder</button>
             </div>
         );
     }
@@ -80,7 +81,7 @@ class App extends React.Component {
         });
     }
 
-    takeOff (message) {
+    arming (message) {
         var self = this;
 
         var url = 'http://localhost:9000/arming';
@@ -94,6 +95,32 @@ class App extends React.Component {
         }
 
         function onLoad(e) {
+            self.addAlert(message);
+        }
+
+        var req = new XMLHttpRequest();
+        req.onprogress = onProgress;
+        req.open("GET", url, true);
+        req.onload = onLoad;
+        req.onerror = onError;
+        req.send(null);
+    }
+
+    takeOff (message) {
+        var self = this;
+
+        var url = 'http://localhost:9000/takingoff';
+        function onProgress(e) {
+            var percentComplete = (e.position / e.totalSize)*100;
+            console.info(percentComplete);
+        }
+
+        function onError(e) {
+            console.warn(e);
+        }
+
+        function onLoad(e) {
+            console.info(e);
             self.addAlert(message);
         }
 
