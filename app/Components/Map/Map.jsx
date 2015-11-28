@@ -3,7 +3,7 @@ import { Card, CardTitle, CardText, CardActions, Button, FABButton, Icon } from 
 import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
 import Battery from '../Battery/Battery.jsx';
 
-require('../Map/Map.css');
+require('./Map.css');
 
 const coords = {
   lat: 54.5258541,

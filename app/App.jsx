@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Grid, Cell } from 'react-mdl';
 import ReactToastr from 'react-toastr';
 
-import Navigation from './Components/Navigation.jsx';
+import Navigation from './Components/Navigation/Navigation.jsx';
 import Logs from './Components/Logs.jsx';
 import Map from './Components/Map/Map.jsx';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardTitle, CardText, CardActions, FABButton, Icon, Button } from 'react-mdl';
-var image = require("file!../drone.jpg");
+require('./Navigation.css');
 
 class Navigation extends React.Component {
 
@@ -13,9 +13,9 @@ class Navigation extends React.Component {
 
     //RENDER
     render() {
-    	return 	<Card shadow={3} style={{width: 'auto', height: '300px'}}>
-                    <CardTitle expand style={{height: '20px', color: '#fff', background: 'url(' + image + ') bottom right 15% no-repeat #46B6AC'}}>
-                    	Navigation
+        return  <Card className="nav-card" shadow={3}>
+                    <CardTitle expand className="nav-title">
+                        Nawigacja
                     </CardTitle>
                     <CardText>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
