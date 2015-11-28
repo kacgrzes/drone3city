@@ -3,6 +3,12 @@
 	height: 300px;
 }
 .nav-title {
-	height: '20px';
-	color: '#fff'; background: url('./drone.jpg') bottom right 15% no-repeat #46B6AC;
+	height: 20px;
+	color: #fff; 
+	background: url('./drone.jpg') bottom right 15% no-repeat #46B6AC;
+}
+.nav-title h2 {
+    background-color: rgba(0,0,0,0.2);
+    margin: -5px;
+    padding: 5px;
 }
