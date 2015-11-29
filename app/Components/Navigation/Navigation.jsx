@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardTitle, CardText, CardActions, FABButton, Icon, Button } from 'react-mdl';
+import { Card, CardTitle, CardText, CardActions, FABButton, Icon, Button, Slider, Tooltip } from 'react-mdl';
 require('./Navigation.css');
 
 class Navigation extends React.Component {
@@ -18,18 +18,19 @@ class Navigation extends React.Component {
                         Nawigacja
                     </CardTitle>
                     <CardText>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Aenan convallis.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Aenan convallis.
+                    Ustaw wysokość zawisu drona: 
+                        <Slider min={0} max={100} defaultValue={25} />
                     </CardText>
                     <CardActions border>
-                        <FABButton 
-                            colored 
-                            ripple 
-                            onClick={this.handleArming}>
-                                <Icon name="vpn_key"/>
-                        </FABButton>
+                        <Tooltip label="Print" large >
+                            <FABButton 
+                                colored 
+                                ripple 
+                                onClick={this.handleArming}>
+                                    <Icon name="vpn_key"/>
+                            </FABButton>    
+                        </Tooltip>
+                        
                         <Button onClick={this.handleTakeOff} raised accent ripple>Oderwij od ziemi</Button>
                     </CardActions>
                 </Card>
