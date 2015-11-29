@@ -2,8 +2,12 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin   = require('html-webpack-plugin');
 var path = require('path');
-var node_modules = path.resolve(__dirname, 'node_modules');
-var buildPath = path.resolve(__dirname, 'build');
+
+var PATHS = {
+  app: path.join(__dirname, 'app'),
+  build: path.join(__dirname, 'build'),
+  node_modules: path.join(__dirname, 'node_modules')
+};
 
 // if build is false then You are in development mode (use "npm run dev");
 var build = false;
@@ -12,15 +16,13 @@ var cfg = {}
 // configuration for entry 
 cfg.entry = build ? {
     app: [ 
-        path.resolve(__dirname, 'app/App.jsx')
+        path.resolve(PATHS.app, 'App.jsx')
     ],
     vendors: ['react']
 } : 
 {
     app: [
-        'webpack/hot/dev-server',
-        'webpack-dev-server/client?http://localhost:8080',
-        path.resolve(__dirname, 'app/App.jsx')
+        path.resolve(PATHS.app, 'App.jsx')
     ]
 };
 
@@ -30,8 +32,16 @@ cfg.plugins = build ? [
         new HtmlWebpackPlugin({
             inject: true,
             template: 'build/index.html'
+        }),
+        new webpack.optimize.UglifyJsPlugin()
+    ] : [
+        new webpack.HotModuleReplacementPlugin(),
+        new HtmlWebpackPlugin({
+            title: 'Kanban app',
+            template: 'build/index.html'
         })
-    ] : [];
+    ];
+
 
 
 //WEBPACK CONFIG
@@ -44,9 +54,19 @@ var config = {
     resolve: {
         alias: {}
     },
+    devServer: {
+        contentBase: PATHS.build,
+        historyApiFallback: true,
+        hot: true,
+        inline: true,
+        progress: true,
+        stats: 'errors-only',
+        host: process.env.HOST,
+        port: process.env.PORT
+    },
     plugins: cfg.plugins,
     output: {
-        path: buildPath,
+        path: PATHS.build,
         filename: 'bundle.js'
     },
     module: {
@@ -58,11 +78,13 @@ var config = {
                 exclude: /node_modules/,
                 query: {
                   presets: ['es2015', 'react']
-                }
+                },
+                include: PATHS.app
             },
             {
                 test: /\.css$/, 
-                loader: 'style!css'
+                loader: 'style!css',
+                include: PATHS.app
             },
             {
                 test: /\.less$/,
@@ -75,6 +97,14 @@ var config = {
             { 
                 test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
                 loader: "file-loader" 
+            },
+            { 
+                test: /\.jpg$/,    
+                loader: "url-loader?limit=10000&minetype=image/jpg" 
+            },
+            { 
+                test: /\.png$/,    
+                loader: "url-loader?limit=10000&minetype=image/png" 
             }
         ]
     }
@@ -82,11 +112,11 @@ var config = {
 
 if(build) {
    // PATHS TO MODULES
-    var pathToReact = path.resolve(node_modules, 'react/dist/react-with-addons.js');
-    var pathToReactDOM = path.resolve(node_modules, 'react-dom/dist/react-dom.js');
-    var pathToInject = path.resolve(node_modules, 'react-tap-event-plugin/src/injectTapEventPlugin.js');
-    var pathToReactMDL = path.resolve(node_modules, 'react-mdl/index.js');
-    var mdl = path.resolve(node_modules, 'material-ui/lib/index.js');
+    var pathToReact = path.resolve(PATHS.node_modules, 'react/dist/react-with-addons.js');
+    var pathToReactDOM = path.resolve(PATHS.node_modules, 'react-dom/dist/react-dom.js');
+    var pathToInject = path.resolve(PATHS.node_modules, 'react-tap-event-plugin/src/injectTapEventPlugin.js');
+    var pathToReactMDL = path.resolve(PATHS.node_modules, 'react-mdl/index.js');
+    var mdl = path.resolve(PATHS.node_modules, 'material-ui/lib/index.js');
 
     config.addVendor('react', pathToReact);
     config.addVendor('react-dom', pathToReactDOM);
