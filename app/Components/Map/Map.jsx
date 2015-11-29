@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardTitle, CardText, CardActions, Button, FABButton, Icon } from 'react-mdl';
+import { Card, CardTitle, CardText, CardActions, Button, FABButton, Icon, Spinner } from 'react-mdl';
 import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
 import Battery from '../Battery/Battery.jsx';
 
@@ -55,7 +55,7 @@ class Map extends React.Component {
             			lat={coords.lat}
             			lng={coords.lng}
             			zoom={11}
-            			loadingMessage={'Be happy'}
+            			loadingMessage={<Spinner />}
             			params={{v: '3.exp'}}
             			onMapCreated={this.onMapCreated}>
 
