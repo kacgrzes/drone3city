@@ -5,7 +5,7 @@ import { Grid, Cell } from 'react-mdl';
 import ReactToastr from 'react-toastr';
 
 import Navigation from './Components/Navigation/Navigation.jsx';
-import Logs from './Components/Logs.jsx';
+import Logs from './Components/Logs/Logs.jsx';
 import Map from './Components/Map/Map.jsx';
 
 

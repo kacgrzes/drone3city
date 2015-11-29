@@ -1,0 +1,16 @@
+.logs-card {
+	width: auto;
+	height: 400px;
+	margin-top: 20px;
+}
+.logs-title {
+	max-height: 160px;
+	color: #fff; 
+	background: url('./logs.png') top right 15% no-repeat #46B6AC;
+}
+.logs-card-text {
+	width: auto;
+}
+.logs-table {
+	width: 100%;
+}
