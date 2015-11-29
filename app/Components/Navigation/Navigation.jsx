@@ -22,15 +22,7 @@ class Navigation extends React.Component {
                         <Slider min={0} max={100} defaultValue={25} />
                     </CardText>
                     <CardActions border>
-                        <Tooltip label="Print" large >
-                            <FABButton 
-                                colored 
-                                ripple 
-                                onClick={this.handleArming}>
-                                    <Icon name="vpn_key"/>
-                            </FABButton>    
-                        </Tooltip>
-                        
+                        <Button onClick={this.handleArming} raised accent ripple><Icon name="vpn_key"/> Uzbrajanie</Button>
                         <Button onClick={this.handleTakeOff} raised accent ripple>Oderwij od ziemi</Button>
                     </CardActions>
                 </Card>
