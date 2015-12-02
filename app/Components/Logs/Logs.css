@@ -14,3 +14,10 @@
 .logs-table {
 	width: 100%;
 }
+
+.logs-error {
+	color: #f44336;
+}
+.logs-success {
+	color: #4caf50;
+}

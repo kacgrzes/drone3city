@@ -6,7 +6,7 @@ class Logs extends React.Component {
   render() {
 	return 	<Card className="logs-card" shadow={3}>
                 <CardTitle className="logs-title">
-                	Logs
+                	Logi
                 </CardTitle>
                 <CardText className="logs-card-text">
                 <DataTable className="logs-table"
@@ -25,4 +25,3 @@ class Logs extends React.Component {
 }
 
 export default Logs;
- 
