@@ -50,8 +50,7 @@ class Map extends React.Component {
   	render() {
 		return 	<Card shadow={3} style={{width: 'auto', height: '100%'}}>
                 <Gmaps
-            			width={'100%'}
-            			height={'620px'}
+                  className="map-container"
             			lat={coords.lat}
             			lng={coords.lng}
             			zoom={11}
