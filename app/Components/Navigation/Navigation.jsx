@@ -18,7 +18,7 @@ class Navigation extends React.Component {
                         Nawigacja
                     </CardTitle>
                     <CardText>
-                    Ustaw wysokość zawisu drona: 
+                    Ustaw wysokość zawisu drona:
                         <Slider min={0} max={100} defaultValue={25} />
                     </CardText>
                     <CardActions border>
@@ -42,4 +42,3 @@ class Navigation extends React.Component {
 }
 
 export default Navigation;
- 
