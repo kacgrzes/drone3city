@@ -2,6 +2,8 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin   = require('html-webpack-plugin');
 var path = require('path');
+var babelJest = require('babel-jest');
+var webpackAlias = require('jest-webpack-alias');
 
 var PATHS = {
   app: path.join(__dirname, 'app'),
@@ -13,13 +15,13 @@ var PATHS = {
 var build = false;
 var cfg = {}
 
-// configuration for entry 
+// configuration for entry
 cfg.entry = build ? {
-    app: [ 
+    app: [
         path.resolve(PATHS.app, 'App.jsx')
     ],
     vendors: ['react']
-} : 
+} :
 {
     app: [
         path.resolve(PATHS.app, 'App.jsx')
@@ -82,7 +84,7 @@ var config = {
                 include: PATHS.app
             },
             {
-                test: /\.css$/, 
+                test: /\.css$/,
                 loader: 'style!css',
                 include: PATHS.app
             },
@@ -90,21 +92,21 @@ var config = {
                 test: /\.less$/,
                 loader: 'style!css!less'
             },
-            { 
-                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
-                loader: "url-loader?limit=10000&minetype=application/font-woff" 
+            {
+                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "url-loader?limit=10000&minetype=application/font-woff"
             },
-            { 
-                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
-                loader: "file-loader" 
+            {
+                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "file-loader"
             },
-            { 
-                test: /\.jpg$/,    
-                loader: "url-loader?limit=10000&minetype=image/jpg" 
+            {
+                test: /\.jpg$/,
+                loader: "url-loader?limit=10000&minetype=image/jpg"
             },
-            { 
-                test: /\.png$/,    
-                loader: "url-loader?limit=10000&minetype=image/png" 
+            {
+                test: /\.png$/,
+                loader: "url-loader?limit=10000&minetype=image/png"
             }
         ]
     }
@@ -122,7 +124,7 @@ if(build) {
     config.addVendor('react-dom', pathToReactDOM);
     config.addVendor('react-mdl', pathToReactMDL);
     config.addVendor('react-tap-event-plugin', pathToInject);
-    config.addVendor('material-ui', mdl); 
+    config.addVendor('material-ui', mdl);
 }
 
 module.exports = config;

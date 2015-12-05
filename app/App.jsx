@@ -38,13 +38,13 @@ class App extends React.Component {
         };
         ws.onmessage = function(event) {
             self.setState({flightParams:event.data});
-            // console.log(self.state.flightParams);
+            console.log(self.state.flightParams);
         }
         ws.onerror = function(event) {
             self.addAlert({
                 type: 'error',
                 title: 'Błąd',
-                text: 'Nie udało się nawiązać połączenia' 
+                text: 'Nie udało się nawiązać połączenia'
             })
         }
     }
@@ -59,7 +59,7 @@ class App extends React.Component {
                         className="toast-top-right" />
                 <Grid>
                     <Cell col={4}>
-                    	<Navigation 
+                    	<Navigation
                             onTakeOff={this.takeOff}
                             onArming={this.arming}
                             ></Navigation>
@@ -73,7 +73,7 @@ class App extends React.Component {
         );
     }
 
-    //CUSTOM METHODS 
+    //CUSTOM METHODS
     addAlert (message) {
         this.refs.container[message.type](
           message.text,
@@ -127,7 +127,8 @@ class App extends React.Component {
         });
     }
 
-
 }
 
 ReactDOM.render(<App/>, document.getElementById('app'));
+
+export default App;
